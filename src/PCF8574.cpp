@@ -38,6 +38,11 @@ PCF8574::PCF8574(uint8_t address)
 	_address = address;
 };
 
+uint8_t PCF8574::LastError(void)
+{
+	return _lastError;
+}
+
 /**
  * Construcor
  * @param address: i2c address
@@ -221,7 +226,7 @@ void PCF8574::begin()
 		writeByteBuffered = writeModeUp;
 
 		DEBUG_PRINTLN("Start end trasmission if stop here check pullup resistor.");
-		_wire->endTransmission();
+		_lastError = _wire->endTransmission();
 	}
 
 	//	// If using interrupt set interrupt value to pin
@@ -703,5 +708,5 @@ void PCF8574::digitalWrite(uint8_t pin, uint8_t value)
 	//	byteBuffered = (writeByteBuffered & writeMode) & (byteBuffered & readMode);
 	DEBUG_PRINTLN("Start end trasmission if stop here check pullup resistor.");
 
-	_wire->endTransmission();
+	_lastError = _wire->endTransmission();
 };
