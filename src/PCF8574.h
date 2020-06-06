@@ -121,6 +121,7 @@ public:
 #endif
 
 	void begin();
+	uint8_t LastError(void);
 	void pinMode(uint8_t pin, uint8_t mode, uint8_t output_start = LOW);
 
 	void encoder(uint8_t pinA, uint8_t pinB);
@@ -163,6 +164,7 @@ public:
 	}
 
 private:
+	uint8_t _lastError;
 	uint8_t _address;
 
 #ifdef __STM32F1__
